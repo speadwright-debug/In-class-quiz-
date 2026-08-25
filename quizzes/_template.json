@@ -1,0 +1,78 @@
+{
+  "_how_to_use": [
+    "COPY this file, rename it (e.g. y11-ionic-bonding.json), fill it in,",
+    "then add one entry to index.json (copy an existing entry, change",
+    "quizId, title, yearLevel and file). That is the whole process.",
+    "Any key starting with an underscore is a comment — the app ignores",
+    "them, so you can delete them or leave them in."
+  ],
+
+  "_quizId": "Unique id for this quiz. kebab-case (lowercase-with-hyphens). Must EXACTLY match the quizId you put in index.json.",
+  "quizId": "y9-example-topic",
+
+  "_title": "Shown to students at the top of the quiz.",
+  "title": "Example Topic",
+
+  "_subtitle": "Optional. Small text under the title, e.g. 'After-lab quiz'. Delete the line if not needed.",
+  "subtitle": "After-lab quiz",
+
+  "_yearLevel": "Used to filter the quiz list. Keep the wording consistent ('Year 9', 'Year 11').",
+  "yearLevel": "Year 9",
+
+  "_durationMinutes": "Optional. Shows students an expected time and a countdown. The countdown NEVER submits or locks anything.",
+  "durationMinutes": 15,
+
+  "_classCodes": "The classes that will sit this quiz. Students pick one from a dropdown.",
+  "classCodes": ["9SCA", "9SCB"],
+
+  "_intro": "Optional. A sentence or two on the start screen.",
+  "intro": "Answer from what you saw in the lab. This is a self-check, not a test.",
+
+  "_questions": "Each question needs: a unique id, the stem (question text), and 2 to 6 options. EXACTLY ONE option has \"correct\": true. EVERY option needs a \"why\" — this is the whole point of the app: students see why their wrong answer was wrong AND why the right one is right. Write the whys like you would explain it to the student across the desk.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Write the question here?",
+      "_misconception": "Optional. ONLY the teacher dashboard shows this. Note what choosing a wrong answer here usually reveals about a student's thinking.",
+      "misconception": "Students who get this wrong usually think X instead of Y.",
+      "options": [
+        {
+          "id": "a",
+          "text": "The right answer.",
+          "correct": true,
+          "why": "Explain WHY this is correct — the reasoning, not just 'this is right'."
+        },
+        {
+          "id": "b",
+          "text": "A tempting wrong answer.",
+          "correct": false,
+          "why": "Explain the specific mistake a student makes when they pick this."
+        },
+        {
+          "id": "c",
+          "text": "Another wrong answer.",
+          "correct": false,
+          "why": "Every option needs its own why — the app refuses to load the quiz if one is missing."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "Second question — ids must be unique (q1, q2, q3…)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Wrong answer.",
+          "correct": false,
+          "why": "Why it's wrong."
+        },
+        {
+          "id": "b",
+          "text": "Right answer.",
+          "correct": true,
+          "why": "Why it's right."
+        }
+      ]
+    }
+  ]
+}
