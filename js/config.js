@@ -18,6 +18,6 @@
 */
 
 const CONFIG = {
-  APPS_SCRIPT_URL: "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE",
-  SHARED_SECRET: "change-me-to-match-code-gs",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxN3oGO2-mcNPdHW00LREsEc6tgzKlywoJ2bV8ttMmaoKpnHqrmmu-CdA7W3kLXR30w/exec",
+  SHARED_SECRET: "kereru-flax-42",
 };
