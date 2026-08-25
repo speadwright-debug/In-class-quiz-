@@ -1,0 +1,372 @@
+/* ============================================================
+   Quiz site styles — mobile-first (360px baseline), WCAG AA.
+   No web fonts (page-weight budget); system stack only.
+   Correct/incorrect is NEVER colour-only: every state carries
+   an icon character plus a word; selection uses border weight
+   plus a check mark.
+   ============================================================ */
+
+:root {
+  --ink: #1c2024;          /* body text */
+  --ink-soft: #4a5158;     /* secondary text — 7.4:1 on paper */
+  --paper: #fbfaf7;        /* page background */
+  --card: #ffffff;
+  --rule: #c9c5bc;         /* hairline rules */
+  --rule-strong: #8d887d;
+  --accent: #0f5c54;       /* deep teal — 7.3:1 on white */
+  --accent-ink: #ffffff;
+  --wash: #eef2f1;         /* quiet field background */
+  --flag: #7a3b00;         /* high-miss flag text — 8:1 on wash */
+  --radius: 6px;
+  --pad: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  font-size: 1rem;           /* 16px minimum, everywhere */
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--pad);
+}
+
+h1, h2, h3 { line-height: 1.25; margin: 0 0 0.5rem; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.05rem; }
+
+p { margin: 0 0 0.75rem; }
+
+a { color: var(--accent); }
+
+.muted { color: var(--ink-soft); }
+.small { font-size: 1rem; } /* deliberately never smaller than body */
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 1.25rem 0; }
+
+/* --- Site header: a ruled worksheet masthead ------------------ */
+.masthead {
+  border-bottom: 3px double var(--rule-strong);
+  padding: 0.9rem var(--pad) 0.7rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.masthead .kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+.masthead a { color: inherit; text-decoration: none; }
+
+/* --- Buttons -------------------------------------------------- */
+button, .btn {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+button.secondary, .btn.secondary {
+  background: var(--card);
+  color: var(--accent);
+}
+button:disabled {
+  background: var(--wash);
+  border-color: var(--rule);
+  color: var(--ink-soft);
+  cursor: not-allowed;
+}
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, summary:focus-visible, label:focus-within {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 1rem; }
+.btn-row > * { flex: 1 1 130px; }
+
+/* --- Forms ---------------------------------------------------- */
+.field { margin-bottom: 1.1rem; }
+.field label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+.field .help { color: var(--ink-soft); margin-top: 0.25rem; }
+input[type="text"], select {
+  width: 100%;
+  font: inherit;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+}
+
+/* --- Cards / notices ------------------------------------------ */
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  margin-bottom: 1rem;
+}
+.notice {
+  border-left: 4px solid var(--rule-strong);
+  background: var(--wash);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 0.75rem 0;
+}
+.notice.problem { border-left-color: var(--flag); }
+
+/* --- Quiz list (index page) ----------------------------------- */
+.quiz-list { list-style: none; margin: 0; padding: 0; }
+.quiz-list li { border-bottom: 1px solid var(--rule); }
+.quiz-list a {
+  display: block;
+  padding: 14px 4px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.quiz-list a:hover .quiz-title { text-decoration: underline; }
+.quiz-list .quiz-title { font-weight: 700; color: var(--accent); }
+.quiz-list .quiz-meta { color: var(--ink-soft); }
+
+/* --- Question screen ------------------------------------------ */
+.progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--ink-soft);
+}
+.timer { font-variant-numeric: tabular-nums; }
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+legend {
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.option {
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+}
+.option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.option .option-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;              /* comfortably over the 44px floor */
+  padding: 12px 14px;
+  background: var(--card);
+  border: 2px solid var(--rule-strong);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.option .mark {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--rule-strong);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: transparent;
+}
+/* Selected: heavier border + visible check mark — not colour alone */
+.option input:checked + .option-body {
+  border-width: 4px;
+  border-color: var(--accent);
+  padding: 10px 12px;            /* compensate border growth: no reflow */
+}
+.option input:checked + .option-body .mark {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.option input:focus-visible + .option-body {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Results --------------------------------------------------- */
+.score-line {
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-bottom: 3px double var(--rule-strong);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.result-q { margin-bottom: 1rem; }
+.result-q .stem { font-weight: 700; margin-bottom: 0.6rem; }
+
+.verdict {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  background: var(--card);
+}
+.verdict .icon {
+  flex: 0 0 auto;
+  font-weight: 700;
+  font-size: 1.1rem;
+  width: 1.4em;
+  text-align: center;
+}
+.verdict .verdict-word { font-weight: 700; }
+.verdict.correct { border-left: 5px solid var(--ink); }
+.verdict.incorrect { border-left: 5px dashed var(--rule-strong); } /* pattern, not colour, tells them apart */
+.verdict .why { margin: 0.25rem 0 0; }
+
+details {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--card);
+  margin-bottom: 10px;
+}
+details > summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  min-height: 44px;
+  font-weight: 600;
+  list-style-position: inside;
+}
+details .details-body { padding: 0 14px 12px; }
+
+/* --- Teacher dashboard ----------------------------------------- */
+.controls {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+  margin-bottom: 1.25rem;
+}
+@media (min-width: 560px) {
+  .controls { grid-template-columns: 1fr 1fr; }
+}
+.toggle-row { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.toggle-row input { width: 22px; height: 22px; }
+
+.q-row { border-bottom: 1px solid var(--rule); padding: 14px 0; }
+.q-row .q-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.q-row .pct { font-weight: 700; font-size: 1.2rem; white-space: nowrap; }
+.bar-track {
+  height: 12px;
+  background: var(--wash);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 6px 0;
+}
+.bar-fill { height: 100%; background: var(--rule-strong); }
+.q-row.high .bar-fill { background: var(--ink); }
+.flag-badge {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--flag);
+  background: var(--wash);
+  border: 1px solid var(--flag);
+  border-radius: var(--radius);
+  padding: 1px 8px;
+  margin-left: 8px;
+}
+.opt-breakdown { margin: 6px 0 0; padding-left: 1.2rem; }
+.opt-breakdown li { margin-bottom: 2px; }
+.misconception {
+  background: var(--wash);
+  border-left: 4px solid var(--rule-strong);
+  padding: 8px 12px;
+  margin-top: 8px;
+}
+
+table.plain { border-collapse: collapse; width: 100%; }
+table.plain th, table.plain td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.histo { display: grid; gap: 4px; }
+.histo-row { display: grid; grid-template-columns: 5.5em 1fr 3em; gap: 8px; align-items: center; }
+
+/* --- Print header (hidden on screen) --------------------------- */
+.print-header { display: none; }
+
+/* --- noscript --------------------------------------------------- */
+.noscript-msg {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: var(--pad);
+  border: 2px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ============================================================
+   PRINT — "Save my results" runs window.print() against this.
+   All sections are expanded by JS on beforeprint; here we make
+   the page a clean greyscale worksheet record.
+   ============================================================ */
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .masthead, .btn-row, button, .no-print, .notice.network { display: none !important; }
+  main { max-width: none; padding: 0; }
+  .print-header {
+    display: block;
+    border-bottom: 2px solid #000;
+    margin-bottom: 12pt;
+    padding-bottom: 6pt;
+  }
+  .print-header .ph-title { font-size: 16pt; font-weight: 700; }
+  details { border: 1px solid #000; }
+  details > summary { list-style: none; }        /* hide disclosure marker */
+  details > summary::-webkit-details-marker { display: none; }
+  .verdict { border-color: #000; page-break-inside: avoid; }
+  .verdict.correct { border-left: 5px solid #000; }
+  .verdict.incorrect { border-left: 5px dashed #000; }
+  .result-q { page-break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+}
